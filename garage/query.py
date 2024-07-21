@@ -9,7 +9,8 @@ class Query:
     location_address: Optional[str] = None
     place_name: Optional[str] = None
     caption: Optional[str] = None
-    people: List[str] = field(default_factory=list)
+    #people: List[str] = field(default_factory=list)
+    people: List[str] = None
     transcription: Optional[str] = None
     duration: Optional[int] = None
     start_date: Optional[datetime] = None
@@ -18,8 +19,8 @@ class Query:
     width: Optional[int] = None
     height: Optional[int] = None
     age: Optional[int] = None
-    limit: int = 100
-    offset: int = 0
+    limit: int = None
+    offset: int = None
     file_type: Optional[str] = None
     file_hash: Optional[str] = None
     num_faces: Optional[int] = None
@@ -46,3 +47,6 @@ class Query:
         yaml.add_constructor('!datetime', datetime_constructor)
         data = yaml.safe_load(yaml_str)
         return cls(**data)
+
+    def __str__(self) -> str:
+        return f"Query:\n{self.to_yaml()}"
